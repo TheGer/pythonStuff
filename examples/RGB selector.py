@@ -12,18 +12,20 @@ im_mod = img.copy()
 
 cv2.namedWindow("Color Manipulator1")
 #label of trackbar, window title, starting value, ending value, method that is called on change
-cv2.createTrackbar('RED', 'Color Manipulator1', 1, 1, donothing)
-cv2.createTrackbar('GREEN', 'Color Manipulator1', 1, 1, donothing)
-cv2.createTrackbar('BLUE', 'Color Manipulator1', 1, 1, donothing)
-
+cv2.createTrackbar('RED', 'Color Manipulator1', 0, 1, donothing)
+cv2.createTrackbar('GREEN', 'Color Manipulator1',0, 1, donothing)
+cv2.createTrackbar('BLUE', 'Color Manipulator1', 0, 1, donothing)
 
 
 
 while True:
 
-    posB = cv2.getTrackbarPos("BLUE", "Color Manipulator")
-    posG = cv2.getTrackbarPos("GREEN", "Color Manipulator")
-    posR = cv2.getTrackbarPos("RED", "Color Manipulator")
+    posB = cv2.getTrackbarPos("BLUE", "Color Manipulator1")
+    posG = cv2.getTrackbarPos("GREEN", "Color Manipulator1")
+    posR = cv2.getTrackbarPos("RED", "Color Manipulator1")
+  #  im_mod[:, :, 2] = posR
+  #  im_mod[:, :, 1] = posG
+  #  im_mod[:, :, 0] = posB
 
     if posR == 0 :
         im_mod[:, :, 2] = 0
@@ -32,7 +34,7 @@ while True:
     if posG == 0:
         im_mod[:, :, 1] = 0
     else:
-        im_mod[:, :, 1] = img[:, :, 1]
+      im_mod[:, :, 1] = img[:, :, 1]
 
     if posB == 0 :
         im_mod[:, :, 0] = 0
@@ -41,6 +43,6 @@ while True:
     cv2.imshow("Output ", im_mod)
 
 
-    if cv2.waitKey(10) & 0xFF == ord('q'):
+    if cv2.waitKey(10) == ord('q'):
         cv2.destroyAllWindows()
         break
